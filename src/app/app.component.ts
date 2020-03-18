@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   projectForm: FormGroup;
   valueChange: any;
   submitted = false;
+  statusList = ['Stable', 'Critical', 'Finished'];
 
   ngOnInit() {
     this.projectForm = new FormGroup({

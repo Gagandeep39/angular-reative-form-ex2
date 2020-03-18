@@ -14,10 +14,10 @@
             <input 
             type="text" 
             name="name" 
-            placeholder="Project Name"
+            placeholder="Project Name" 
             id="name" 
             class="form-control"
-            [ngClass]="{'is-invalid': submitted && projectForm.get('pname').invalid}"
+            [ngClass]="{'is-invalid': submitted && projectForm.get('pname').invalid}" 
             formControlName="pname">
             <div class="invalid-feedback" *ngIf="submitted && projectForm.get('pname').invalid">
                 <div *ngIf="projectForm.get('pname').errors['required']">Field Cannot be Empty</div>
@@ -27,11 +27,11 @@
         <div class="form-group">
             <label for="email">Project Email</label>
             <input 
-            type="email"
+            type="email" 
             name="email" 
             id="email" 
             class="form-control"
-            [ngClass]="{'is-invalid': submitted && projectForm.get('pemail').invalid}"
+            [ngClass]="{'is-invalid': submitted && projectForm.get('pemail').invalid}" 
             placeholder="Project Email"
             formControlName="pemail">
             <div class="invalid-feedback" *ngIf="submitted && projectForm.get('pemail').invalid">
@@ -40,6 +40,18 @@
             </div>
         </div>
         <!-- Project Status  -->
+        <div class="form-group">
+            <label for="status">Project Status</label>
+            <select 
+            name="status" 
+            id="status" 
+            formControlName="pstatus"
+            [ngClass]="{'is-invalid': submitted && projectForm.get('pstatus').invalid}" 
+            class="custom-select">
+                <option *ngFor="let s of statusList" [value]="s"> {{s}} </option>
+            </select>
+            <div class="invalid-feedback" *ngIf="submitted && projectForm.get('pstatus').invalid">Select a Value</div>
+        </div>
         <!-- Submit Button  -->
         <button type="submit" class="btn btn-primary">Submit</button>
 
