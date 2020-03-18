@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Subscription, Observable } from "rxjs";
 import { resolve } from "url";
+import { CustomValidators } from "./custom-validators";
 
 @Component({
   selector: "app-root",
@@ -18,8 +19,8 @@ export class AppComponent implements OnInit {
     this.projectForm = new FormGroup({
       pname: new FormControl(
         null,
-        Validators.required,
-        this.forbiddenNameValidator
+        Validators.required, 
+        CustomValidators.forbiddenNameValidatorAsync
       ),
       pemail: new FormControl(null, [Validators.required, Validators.email]),
       pstatus: new FormControl(null, Validators.required)
@@ -40,15 +41,4 @@ export class AppComponent implements OnInit {
     console.log(this.projectForm)
   }
 
-  forbiddenNameValidator(
-    control: FormControl
-  ): Promise<any> | Observable<any> | any {
-    const promise = new Promise((resolve, reject) => {
-      setInterval(() => {
-        if (control.value === "Test") resolve({ 'nameIsForbidden': true });
-        else resolve(null);
-      }, 1000);
-    });
-    return promise;
-  }
 }
