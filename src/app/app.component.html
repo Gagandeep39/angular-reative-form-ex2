@@ -7,15 +7,30 @@
 <!-- Print result in screen -->
 
 <div class="container">
-    <form [formGroup]="projectForm">
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
         <!-- Project name  -->
+        <div class="form-group">
+            <label for="name">Project Name</label>
+            <input 
+            type="text" 
+            name="name" 
+            placeholder="Project Name"
+            id="name" 
+            class="form-control"
+            [ngClass]="{'is-invalid': submitted && projectForm.get('pname').invalid}"
+            formControlName="pname">
+            <div class="invalid-feedback" *ngIf="submitted && projectForm.get('pname').invalid">
+                <div *ngIf="projectForm.get('pname').errors['required']">Field Cannot be Empty</div>
+            </div>
+        </div>
         <!-- Project Email  -->
         <!-- Project Status  -->
-        <!-- Sybmit Button  -->
+        <!-- Submit Button  -->
+        <button type="submit" class="btn btn-primary">Submit</button>
 
     </form>
 </div>
 <div>
     <!-- Output Result  -->
-    {{ valueSubscription | json}}
+    {{ valueChange | json}}
 </div>

@@ -1,20 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
   projectForm: FormGroup;
-  valueSubscription: Subscription;
+  valueChange: any;
+  submitted = false;
 
-  ngOnInit(){
-    this.valueSubscription = this.projectForm.valueChanges.subscribe( (changes) => {
-      this.valueSubscription = changes;
+  ngOnInit() {
+    this.projectForm = new FormGroup({
+      pname: new FormControl(null, Validators.required),
+      pemail: new FormControl(null, [Validators.required, Validators.email]),
+      pstatus: new FormControl(null, Validators.required)
+    });
+
+    this.projectForm.valueChanges.subscribe(changes => {
+      this.valueChange = changes;
     });
   }
 
+  onSubmit() {
+    this.submitted = true;
+    if (this.projectForm.valid) {
+      alert("Submitted");
+      this.submitted = false;
+      this.projectForm.reset();
+    }
+  }
 }
