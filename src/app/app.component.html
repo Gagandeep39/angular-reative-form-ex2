@@ -1,5 +1,5 @@
-<!-- Project name shoyld not be empty  -->
-<!-- Mail should not be empty, email validator  -->
+<!-- Project name shoyld not be empty - DONE -->
+<!-- Mail should not be empty, email validator - DONE -->
 <!-- Project status dropdown [Stable, Critical, Finished] -->
 <!-- Submit button  -->
 <!-- Custom validator -> Test is a forbidden name  -->
@@ -24,6 +24,21 @@
             </div>
         </div>
         <!-- Project Email  -->
+        <div class="form-group">
+            <label for="email">Project Email</label>
+            <input 
+            type="email"
+            name="email" 
+            id="email" 
+            class="form-control"
+            [ngClass]="{'is-invalid': submitted && projectForm.get('pemail').invalid}"
+            placeholder="Project Email"
+            formControlName="pemail">
+            <div class="invalid-feedback" *ngIf="submitted && projectForm.get('pemail').invalid">
+                <div *ngIf="projectForm.get('pemail').errors['required']">Field Cannot be Empty</div>
+                <div *ngIf="projectForm.get('pemail').errors['email']">Enter a Valid Email</div>
+            </div>
+        </div>
         <!-- Project Status  -->
         <!-- Submit Button  -->
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -32,5 +47,6 @@
 </div>
 <div>
     <!-- Output Result  -->
-    {{ valueChange | json}}
+    {{ projectForm.value | json }}
+    {{ projectForm.status | json }}
 </div>
